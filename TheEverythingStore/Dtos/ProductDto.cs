@@ -5,29 +5,18 @@ namespace TheEverythingStore.Dtos {
    public record ProductDto {
 
       [Required]
-      public long Sku {
-         get;
-         init;
-      }
+      public long Sku { get; init; }
       
       [Required]
-      public string Name {
-         get;
-         init;
-      }
+      public string Name { get; init; }
       
       [Required]
       [Range(1, double.MaxValue)]
-      public double Price {
-         get;
-         init;
-      }
-      
+      public double Price { get; init; }
+
       [Required]
       [Url]
-      public string Image {
-         get;
-         init;
-      }
+      public string Image { get; init; }
+   
    }
 }
