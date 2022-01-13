@@ -11,6 +11,7 @@ namespace TheEverythingStore.Controllers {
    [ApiController]
    [Route("products")]
    public class ProductsController: ControllerBase {
+
       private readonly IProductRepository productRepository;
 
       public ProductsController(IProductRepository repository) {
@@ -26,13 +27,11 @@ namespace TheEverythingStore.Controllers {
       // GET /products/{sku}
       [HttpGet("{sku}")]
       public ActionResult<ProductDto> Get(long sku) {
-         var product = productRepository.GetProduct(sku);
-         if (product is null) {
-            return NotFound();
-         }
-         return product.AsProductDto();
-      }
 
+         var product = productRepository.GetProduct(sku);
+         return product is null ? (NotFound()) : (product.AsProductDto());
+
+      }
 
       // POST /products
       [HttpPost]
@@ -46,7 +45,7 @@ namespace TheEverythingStore.Controllers {
          };
 
          productRepository.CreateProduct(product);
-         
+
          return CreatedAtAction(nameof(Get), new {
             Sku = product.Sku
          }, product.AsProductDto());

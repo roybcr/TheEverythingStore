@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using TheEverythingStore.Models;
-using TheEverythingStore.Dtos;
 
 namespace TheEverythingStore.Repositories {
 
@@ -322,7 +321,16 @@ namespace TheEverythingStore.Repositories {
       }
 
       public void CreateProduct(Product product) {
-         products.Add(product);
+
+         var existingProduct = this.GetProduct(product.Sku);
+         
+         if (existingProduct is null) {
+            
+            // Using the New() method to create a Product from another Product - [Extensions.cs].
+            products.Add(product.New());
+         
+         }
+
       }
    }
 }

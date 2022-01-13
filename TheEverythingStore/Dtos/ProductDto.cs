@@ -19,4 +19,5 @@ namespace TheEverythingStore.Dtos {
       public string Image { get; init; }
    
    }
+
 }
