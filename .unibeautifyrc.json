@@ -4,14 +4,10 @@
     "align_assignments": true,
     "break_chained_methods": false,
     "indent_comments": true,
-    "indent_size": 4,
+    "indent_size": 3,
     "indent_style": "space",
     "multiline_ternary": "never",
     "quotes": "double",
-    "wrap_line_length": 90
-  },
-  "json": {
-    "beautifiers": ["esbenp.prettier-vscode"],
-    "indent_size": 4
+    "max_preserve_newlines": 2
   }
 }
