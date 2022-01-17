@@ -1,13 +1,18 @@
 {
   "C#": {
     "beautifiers": ["Pretty Diff"],
-    "align_assignments": true,
+    "align_assignments": false,
     "break_chained_methods": false,
     "indent_comments": true,
-    "indent_size": 3,
+    "indent_size": 4,
     "indent_style": "space",
     "multiline_ternary": "never",
     "quotes": "double",
-    "max_preserve_newlines": 2
+    "max_preserve_newlines": 2,
+    "wrap_line_length": 100
+  },
+  "json": {
+    "beautifiers": ["esbenp.prettier-vscode"],
+    "indent_size": 4
   }
 }

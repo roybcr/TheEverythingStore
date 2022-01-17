@@ -1,23 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TheEverythingStore.Dtos {
+namespace TheEverythingStore.Dtos
+{
+    public record ProductDto
+    {
+        [Required]
+        public long sku { get; init; }
 
-   public record ProductDto {
+        [Required]
+        public string name { get; init; }
 
-      [Required]
-      public long Sku { get; init; }
-      
-      [Required]
-      public string Name { get; init; }
-      
-      [Required]
-      [Range(1, double.MaxValue)]
-      public double Price { get; init; }
+        [Required]
+        [Range(1, double.MaxValue)]
+        public double salePrice { get; init; }
 
-      [Required]
-      [Url]
-      public string Image { get; init; }
-   
-   }
-
+        [Required]
+        [Url]
+        public string image { get; init; }
+    }
 }

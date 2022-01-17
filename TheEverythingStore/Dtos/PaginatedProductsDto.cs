@@ -1,25 +1,18 @@
 using System;
 using System.Collections.Generic;
+using TheEverythingStore.Models;
 
-
-namespace TheEverythingStore.Dtos {
-
-   public record PaginatedProductsDto {
-
-      public int From { get; init; }
-      
-      public int To { get; init; }
-      
-      public int CurrentPage { get; init; }
-      
-      public int TotalPages { get; init; }
-      
-      public int Total { get; init; }
-      
-      public string ShortDescriptionHtml { get; init; }
-      
-      public IEnumerable<ProductDto> products { get; init; }
-      
-   }
+namespace TheEverythingStore.Dtos
+{
+    public record PaginatedProductsDto
+    {
+        public int from { get; init; }
+        public int to { get; init; }
+        public int currentPage { get; init; }
+        public int totalPage { get; init; }
+        public int total { get; init; }
+        public string shortDescriptionHTML { get; init; }
+        public IEnumerable<Product> products { get; init; }
+    }
 
 }
