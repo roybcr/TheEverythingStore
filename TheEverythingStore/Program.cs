@@ -8,6 +8,7 @@ namespace TheEverythingStore
 {
     public class Program
     {
+        public static readonly string appOrigin = "_StoreClient";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args)
@@ -25,6 +26,8 @@ namespace TheEverythingStore
             {
                 services.AddHttpClient();
                 services.AddTransient<ProductService>();
+                services.AddCors(options =>
+                options.AddPolicy(name: appOrigin, builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); }));
             });
     }
 }

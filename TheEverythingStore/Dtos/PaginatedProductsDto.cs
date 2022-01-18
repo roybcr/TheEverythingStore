@@ -14,5 +14,4 @@ namespace TheEverythingStore.Dtos
         public string shortDescriptionHTML { get; init; }
         public IEnumerable<Product> products { get; init; }
     }
-
 }

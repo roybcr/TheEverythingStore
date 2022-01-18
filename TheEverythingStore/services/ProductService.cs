@@ -19,16 +19,13 @@ namespace TheEverythingStore.Services
             httpClientFactory
         );
 
-        public async Task<IEnumerable<Product>> FetchProductsOnInit()
+        public async Task<IEnumerable<Product>> FetchProducts(UrlParams options)
         {
             // Creating the HTTP Client.
             HttpClient client = this.httpClient.CreateClient();
 
             try
             {
-                // Specify the URL parameters for the request.
-                UrlParams options = new UrlParams() { show = true, page = 1, pageSize = 30 };
-
                 // Helper method to customize the request URL according to our needs.
                 string url = Helpers.Utils.BuildURL(options);
 
@@ -37,12 +34,15 @@ namespace TheEverythingStore.Services
 
                 if (result is not null)
                 {
-                    IEnumerable<Product> incomingProducts = result.products.Select((p) => new Product()
+                    IEnumerable<Product> incomingProducts = result.products.Select((p) =>
                     {
-                        sku = p.sku,
-                        name = p.name,
-                        salePrice = p.salePrice,
-                        image = p.image,
+                        return new Product()
+                        {
+                            sku = p.sku,
+                            name = p.name,
+                            salePrice = p.salePrice,
+                            image = p.image,
+                        };
                     });
 
                     return incomingProducts.ToList();

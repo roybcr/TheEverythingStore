@@ -4,15 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TheEverythingStore.Repositories;
 using TheEverythingStore.Dtos;
-
+using System.Threading.Tasks;
+using TheEverythingStore.Models;
 namespace TheEverythingStore.Controllers
 {
-
     [ApiController]
     [Route("products")]
     public class ProductsController : ControllerBase
     {
-
         private readonly IProductRepository productRepository;
 
         public ProductsController(IProductRepository repository)
@@ -27,14 +26,12 @@ namespace TheEverythingStore.Controllers
             return productRepository.GetProducts().Select(p => p.AsProductDto());
         }
 
-        // GET /products/{sku}
-        [HttpGet("{sku}")]
-        public ActionResult<ProductDto> Get(long sku)
+        // GET /products/{name}
+        [HttpGet("{name}")]
+        public async Task<IEnumerable<ProductDto>> Get(string name)
         {
-
-            var product = productRepository.GetProduct(sku);
-            return product is null ? (NotFound()) : (product.AsProductDto());
-
+            IEnumerable<Product> products = (await this.productRepository.GetProductsByName(name));
+            return products.Select((p => p.AsProductDto()));
         }
     }
 }

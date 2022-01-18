@@ -1,9 +1,9 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using TheEverythingStore.Models;
 using TheEverythingStore.Services;
 using System.Threading.Tasks;
+using TheEverythingStore.Helpers;
 
 namespace TheEverythingStore.Repositories
 {
@@ -15,26 +15,30 @@ namespace TheEverythingStore.Repositories
         public ProductRepository(ProductService productService)
         {
             this.productService = productService;
-            
+
             // Initialize the Product list with some data on init.
-            this.fetchProducts().Wait();
+            this.initialize().Wait();
         }
 
 
-        private async Task<bool> fetchProducts()
+        private async Task<bool> initialize()
         {
-            this.products.AddRange(await this.productService.FetchProductsOnInit());
+            UrlParams options = new UrlParams() { page = 1, pageSize = 50 };
+            this.products.AddRange(await this.productService.FetchProducts(options));
             return true;
         }
 
         public IEnumerable<Product> GetProducts()
         {
+            System.Console.WriteLine(" --------------- Getting Products ----------------");
             return this.products;
         }
 
-        public Product GetProduct(long sku)
+        public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
-            return products.Where(product => product.sku == sku).SingleOrDefault();
+            UrlParams options = new UrlParams() { page = 1, pageSize = 5, name = name };
+            this.products.AddRange(await this.productService.FetchProducts(options));
+            return this.products;
         }
     }
 }

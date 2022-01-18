@@ -9,6 +9,7 @@ using TheEverythingStore.Services;
 
 namespace TheEverythingStore
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration) { Configuration = configuration; }
@@ -18,6 +19,7 @@ namespace TheEverythingStore
         {
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -38,8 +40,10 @@ namespace TheEverythingStore
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheEverythingStore v1"));
             }
 
+
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(Program.appOrigin);
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

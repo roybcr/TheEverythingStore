@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using TheEverythingStore.Models;
+using System.Threading.Tasks;
+
+
 namespace TheEverythingStore.Repositories
 {
     public interface IProductRepository
     {
-        Product GetProduct(long sku);
         IEnumerable<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProductsByName(string name);
     }
 }

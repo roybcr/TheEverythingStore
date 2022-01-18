@@ -1,0 +1,137 @@
+<style>
+  :host {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    font-size: 14px;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 8px 8px 8px;
+    border-bottom: 1px solid #bbbbbb;
+    background-color: #ffffff;
+    color: rgb(12, 12, 12);
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover,
+  .toolbar #youtube-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: flex;
+    margin: 100px auto 32px;
+    padding: 0 8px;
+    max-width: 80%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-container {
+    justify-content: center;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+    .card-container > *:not(.circle-link),
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
+
+<div class="toolbar">
+  <img width="50" alt="The Everything Store Logo" src="../assets/CHAI.png" />
+</div>
+
+<div class="content" role="main">
+  <div>
+    <h2>Browse Our Products</h2>
+    <p>Here are some links to help you get started:</p>
+
+    <app-searchbox (onSearchEvent)="onSearch($event)"></app-searchbox>
+  </div>
+
+  <div class="card-container">
+    <div class="cards" *ngIf="shouldShowIncoming">
+      <app-productCard
+        *ngFor="let product of incoming"
+        [product]="product"
+      ></app-productCard>
+    </div>
+    <div class="cards" *ngIf="!shouldShowIncoming">
+      <app-productCard
+        *ngFor="let product of products"
+        [product]="product"
+      ></app-productCard>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
