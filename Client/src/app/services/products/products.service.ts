@@ -15,8 +15,4 @@ export class ProductsService {
   getByName(name: string) {
     return this.httpClient.get<IProduct[]>(productsByNameEP(name));
   }
-
-  getProduct(sku: string) {
-    return this.httpClient.get<IProduct>(`${productsEP}/${sku}`);
-  }
 }

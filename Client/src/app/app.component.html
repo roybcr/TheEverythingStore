@@ -50,11 +50,6 @@
     margin: 0 16px;
   }
 
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
   .content {
     display: flex;
     margin: 100px auto 32px;
@@ -87,22 +82,6 @@
       height: 16px;
       margin: 8px 0;
     }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
   }
 </style>
 
@@ -114,7 +93,6 @@
   <div>
     <h2>Browse Our Products</h2>
     <p>Here are some links to help you get started:</p>
-
     <app-searchbox (onSearchEvent)="onSearch($event)"></app-searchbox>
   </div>
 
@@ -125,6 +103,7 @@
         [product]="product"
       ></app-productCard>
     </div>
+
     <div class="cards" *ngIf="!shouldShowIncoming">
       <app-productCard
         *ngFor="let product of products"

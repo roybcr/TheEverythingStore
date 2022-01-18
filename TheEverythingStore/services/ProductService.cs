@@ -23,12 +23,10 @@ namespace TheEverythingStore.Services
         {
             // Creating the HTTP Client.
             HttpClient client = this.httpClient.CreateClient();
-
             try
             {
                 // Helper method to customize the request URL according to our needs.
                 string url = Helpers.Utils.BuildURL(options);
-
                 // Make HTTP Get Request & Parse JSON response into PaginatedProductsDto type.
                 PaginatedProductsDto result = await client.GetFromJsonAsync<PaginatedProductsDto>(url);
 
@@ -47,15 +45,12 @@ namespace TheEverythingStore.Services
 
                     return incomingProducts.ToList();
                 }
-
                 else { throw new Exception("Something went wrong."); }
             }
-
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
     }
 }

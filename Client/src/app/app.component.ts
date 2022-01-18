@@ -15,8 +15,8 @@ import {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  sub: Subscription = new Subscription();
 
+  sub: Subscription = new Subscription();
   products: IProduct[] = [];
   incoming: IProduct[] = [];
 
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       .pipe(
         tap((result) => {
           this.products = [...this.products, ...this.incoming];
-          this.incoming = [...result.reverse().slice(0, 5)];
+          this.incoming = [...result];
           if (result.length > 0) {
             this.shouldShowIncoming = true;
           }

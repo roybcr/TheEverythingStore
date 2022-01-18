@@ -30,15 +30,15 @@ namespace TheEverythingStore.Repositories
 
         public IEnumerable<Product> GetProducts()
         {
-            System.Console.WriteLine(" --------------- Getting Products ----------------");
             return this.products;
         }
 
         public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
             UrlParams options = new UrlParams() { page = 1, pageSize = 5, name = name };
-            this.products.AddRange(await this.productService.FetchProducts(options));
-            return this.products;
+            IEnumerable<Product> data = (await this.productService.FetchProducts(options));
+            this.products.AddRange(data);
+            return data;
         }
     }
 }
